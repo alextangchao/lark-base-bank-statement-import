@@ -4,7 +4,7 @@ import {bitable, TableMeta, IFieldMeta} from "@lark-base-open/js-sdk";
 import {Button, Col, Form, Row, Select, Table, Avatar} from "@douyinfe/semi-ui";
 import {BaseFormApi} from "@douyinfe/semi-foundation/lib/es/form/interface";
 import {useState, useEffect, useRef, useCallback, useMemo} from "react";
-import FileUpload from "./components/FileUpload";
+import BillUpload from "./components/BillUpload";
 import {OptionProps} from "@douyinfe/semi-ui/lib/es/select";
 
 import {IconMore} from '@douyinfe/semi-icons';
@@ -169,7 +169,7 @@ export default function App() {
                 Edit <code>src/App.tsx</code> and save to reload
             </h4>
 
-            <FileUpload
+            <BillUpload
                 data={billData}
                 setData={setBillData}
                 hasUploadFile={hasUploadFile}

@@ -4,7 +4,7 @@ import {customRequestArgs} from "@douyinfe/semi-ui/lib/es/upload/interface";
 import Papa from "papaparse";
 
 // @ts-ignore
-export default function FileUpload({data, setData, hasUploadFile, setHasUploadFile}) {
+export default function BillUpload({data, setData, hasUploadFile, setHasUploadFile}) {
     let [fileName, setFileName] = useState("");
     // let [data, setData] = useState({});
 
