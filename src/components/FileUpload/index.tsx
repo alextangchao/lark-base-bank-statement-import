@@ -4,13 +4,18 @@ import {customRequestArgs} from "@douyinfe/semi-ui/lib/es/upload/interface";
 import Papa from "papaparse";
 
 // @ts-ignore
-export default function FileUpload({data, setData}) {
+export default function FileUpload({data, setData, hasUploadFile, setHasUploadFile}) {
     let [fileName, setFileName] = useState("");
     // let [data, setData] = useState({});
 
     let [showData, setShowData] = useState({});
 
     function checkBill() {
+    }
+
+    function clearBillData() {
+        setData([]);
+        setHasUploadFile(false);
     }
 
     async function openFile(requestArgs: customRequestArgs) {
@@ -28,6 +33,7 @@ export default function FileUpload({data, setData}) {
             complete: function (results: { data: any }) {
                 console.log(results.data);
                 setData(results.data)
+                setHasUploadFile(true);
             },
         });
 
@@ -36,8 +42,6 @@ export default function FileUpload({data, setData}) {
         // setTimeout(() => requestArgs.onSuccess({}), 1000);
         // console.log(requestArgs);
     }
-
-    // TODO: clear bill data when user remove file
 
     return (
         <>
@@ -50,6 +54,8 @@ export default function FileUpload({data, setData}) {
                 draggable={true}
                 // dragMainText={'点击上传文件或拖拽文件到这里'}
                 dragSubText="仅支持csv、xls、xlsx类型文件"
+                onClear={clearBillData}
+                onRemove={clearBillData}
                 onSuccess={(data) => setShowData(data)}
                 customRequest={openFile}
                 style={{marginTop: 10}}
