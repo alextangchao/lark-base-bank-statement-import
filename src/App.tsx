@@ -1,7 +1,7 @@
 import "./App.css";
 // @ts-ignore
 import {bitable, TableMeta, IFieldMeta} from "@lark-base-open/js-sdk";
-import {Button, Col, Form, Row, Select, Table, Avatar} from "@douyinfe/semi-ui";
+import {Button, Col, Form, Row, Select, Table, Avatar, ButtonGroup} from "@douyinfe/semi-ui";
 import {BaseFormApi} from "@douyinfe/semi-foundation/lib/es/form/interface";
 import {useState, useEffect, useRef, useCallback, useMemo} from "react";
 import BillUpload from "./components/BillUpload";
@@ -19,7 +19,8 @@ export default function App() {
     const [billData, setBillData] = useState<string[][]>([[]]);
     const [headerSelectOption, setHeaderSelectOption] = useState<OptionProps[]>([]);
     const [tableData, setTableData] = useState<{
-        key: string | number
+        key: string | number,
+        name: string
     }[]>([]);
 
 
@@ -217,39 +218,13 @@ export default function App() {
                                             })}
                                     </Form.Select>
                                 </Col>
+                                <Col span={24}>
+                                    <ButtonGroup>
+                                        <Button>自动匹配</Button>
+                                        <Button>清空</Button>
+                                    </ButtonGroup>
+                                </Col>
                             </Row>
-                            {/*<Row>*/}
-                            {/*    <Col span={12}>*/}
-                            {/*        <Form.Select field='business2' label="原字段" disabled style={{width: '200px'}}>*/}
-                            {/*            <Form.Select.Option value="abc">Semi</Form.Select.Option>*/}
-                            {/*            <Form.Select.Option value="ulikeCam">轻颜相机</Form.Select.Option>*/}
-                            {/*            <Form.Select.Option value="toutiao">今日头条</Form.Select.Option>*/}
-                            {/*        </Form.Select>*/}
-                            {/*    </Col>*/}
-                            {/*    <Col span={12}>*/}
-                            {/*        <Form.Select field="role" label='角色' style={{width: '200px'}}>*/}
-                            {/*            <Form.Select.Option value="operate">运营</Form.Select.Option>*/}
-                            {/*            <Form.Select.Option value="rd">开发</Form.Select.Option>*/}
-                            {/*            <Form.Select.Option value="pm">产品</Form.Select.Option>*/}
-                            {/*            <Form.Select.Option value="ued">设计</Form.Select.Option>*/}
-                            {/*        </Form.Select>*/}
-                            {/*    </Col>*/}
-                            {/*    /!*{Array.isArray(billData[formState.values.header]) &&*!/*/}
-                            {/*    /!*    billData[formState.values.header].map((element: string, index) => {*!/*/}
-                            {/*    /!*        const id = "aa" + index;*!/*/}
-                            {/*    /!*        return (*!/*/}
-                            {/*    /!*            <Col span={12}>*!/*/}
-                            {/*    /!*                <Form.Select key={id} field={id} label={element} style={{width: "90%"}}>*!/*/}
-                            {/*    /!*                    <Form.Select.Option value="operate">运营</Form.Select.Option>*!/*/}
-                            {/*    /!*                    <Form.Select.Option value="rd">开发</Form.Select.Option>*!/*/}
-                            {/*    /!*                    <Form.Select.Option value="pm">产品</Form.Select.Option>*!/*/}
-                            {/*    /!*                    <Form.Select.Option value="ued">设计</Form.Select.Option>*!/*/}
-                            {/*    /!*                </Form.Select>*!/*/}
-                            {/*    /!*            </Col>*!/*/}
-                            {/*    /!*        )*!/*/}
-                            {/*    /!*    })*!/*/}
-                            {/*    /!*}*!/*/}
-                            {/*</Row>*/}
 
                             <Table
                                 columns={tableColumns}
@@ -259,6 +234,31 @@ export default function App() {
                                 // scroll={scroll}
                                 pagination={false}
                             />
+
+                            <Row>
+                                <Col>
+                                    <Form.Select field='business2' label="索引字段" style={{width: "100%"}}>
+                                        {Array.isArray(tableData) &&
+                                            tableData.map(({key, name}, index) => {
+                                                return (
+                                                    <Form.Select.Option key={key} value={key}>
+                                                        {name}
+                                                    </Form.Select.Option>
+                                                );
+                                            })
+                                        }
+                                    </Form.Select>
+                                </Col>
+                                {/*<Col span={12}>*/}
+                                {/*    <Form.Select field="role" label='角色' style={{width: "100%"}}>*/}
+                                {/*        <Form.Select.Option value="operate">运营</Form.Select.Option>*/}
+                                {/*        <Form.Select.Option value="rd">开发</Form.Select.Option>*/}
+                                {/*        <Form.Select.Option value="pm">产品</Form.Select.Option>*/}
+                                {/*        <Form.Select.Option value="ued">设计</Form.Select.Option>*/}
+                                {/*    </Form.Select>*/}
+                                {/*</Col>*/}
+                            </Row>
+
 
                             <br/>
 
